@@ -1,4 +1,5 @@
-local CLOUDYZU_VERSION="10.09.2023"
+local LINJECTOR_VERSION="10.09.2023"
+
 loadstring(game:HttpGet("https://api.irisapp.ca/Scripts/IrisInstanceProtect.lua"))() -- credit to iris
 local hash=loadstring(game:HttpGet("https://raw.githubusercontent.com/zzerexx/scripts/main/HashLib.lua"), "HashLib")()
 local disassemble=loadstring(game:HttpGet("https://raw.githubusercontent.com/TheSeaweedMonster/Luau/main/decompile.lua"), "Disassembler")()
@@ -84,7 +85,7 @@ local none=newcclosure(function() end, "none")
 local function define(name, value, parent)
 local Function=(typeof(value) == "function" and islclosure(value) and newcclosure(value, name)) or value
 if parent ~= nil then
-parent[name]=Function
+parent[name]=lol
 return
 end
 getgenv()[name]=Function
@@ -107,11 +108,10 @@ define(v, none, t)
 end
 
 define(identifyexecutor, function()
-return "Cortexion", CLOUDYZU_VERSION
+return "Cortexion", LINJECTOR_VERSION
 end)
 define(getexecutorname, function()
-return "Cortexion", CLOUDYZU_VERSION
-
+return "Cortexion", LINJECTOR_VERSION
 end)
 
 define("disassemble", disassemble)
@@ -238,12 +238,12 @@ end
 return crypt.custom_decrypt(data, key, nonce, ciphers[cipher:gsub("", "-")])
 end, custom)
 define("hash", function(alg, data)
-alg=alg:lower():gsub("", "-")
+alg=alg:lower():gsub("_", "-")
 local HashLib=table.find(hashlibalgs, alg)
 local SwLib=table.find(hashalgs, alg)
 assert(HashLib or SwLib, "bad argument #1 to 'hash' (non-existant hash algorithm)")
 if HashLib then
-return hashalg:gsub("-", "")
+return hashalg:gsub("-", "_")
 end
 if SwLib then
 return c.hash(data, alg):lower()
@@ -306,7 +306,7 @@ local Functions={
 }
 
 SendFunction=function(text)
-writefile("Cortexion/Cortexion.li", text)
+writefile("CORTEXION/CORTEXION.li", text)
 end
 
 for name, func in pairs(Functions) do
@@ -329,116 +329,110 @@ set=toclipboard
 
 SendFunction(('welcome|||%s|||%s'):format(localplayer.DisplayName, MarketplaceService:GetProductInfo(game.PlaceId).Name))
 
-local CortexionNotification = Instance.new("ScreenGui")
-local holder_1 = Instance.new("Frame")
+local CortexionNotification=Instance.new("ScreenGui")
+local holder_1=Instance.new("Frame")
+local UIListLayout_1=Instance.new("UIListLayout")
+local container_1=Instance.new("Frame")
+local main_1=Instance.new("Frame")
+local Top_1=Instance.new("TextLabel")
+local UICorner_1=Instance.new("UICorner")
+local CortexionIcon_1=Instance.new("ImageLabel")
+local UIPadding_1=Instance.new("UIPadding")
+local UICorner_2=Instance.new("UICorner")
+local UIGradient_1=Instance.new("UIGradient")
+local UIStroke_1=Instance.new("UIStroke")
+local UIGradient_2=Instance.new("UIGradient")
+local information_1=Instance.new("TextLabel")
+local UIPadding_2=Instance.new("UIPadding")
+local UIPadding_3=Instance.new("UIPadding")
+CortexionNotification.Name=c.generatebytes()
+CortexionNotification.Parent=game.CoreGui
+CortexionNotification.DisplayOrder=2147483647
+holder_1.Parent=CortexionNotification
+holder_1.AnchorPoint=Vector2.new(0.5, 0.5)
+holder_1.BackgroundColor3=Color3.fromRGB(255,255,255)
+holder_1.BackgroundTransparency=1
+holder_1.BorderColor3=Color3.fromRGB(0,0,0)
+holder_1.BorderSizePixel=0
+holder_1.Position=UDim2.new(0.5, 0,0.5, 0)
+holder_1.Size=UDim2.new(1, 0,1, 0)
+UIListLayout_1.Parent=holder_1
+UIListLayout_1.HorizontalAlignment=Enum.HorizontalAlignment.Right
+UIListLayout_1.SortOrder=Enum.SortOrder.LayoutOrder
+UIListLayout_1.VerticalAlignment=Enum.VerticalAlignment.Bottom
+container_1.Parent=holder_1
+container_1.AnchorPoint=Vector2.new(0.5, 0.5)
+container_1.BackgroundColor3=Color3.fromRGB(255,255,255)
+container_1.BackgroundTransparency=1
+container_1.BorderColor3=Color3.fromRGB(0,0,0)
+container_1.BorderSizePixel=0
+container_1.Position=UDim2.new(0.907002985, 0,0.891910732, 0)
+container_1.Size=UDim2.new(0, 250,0, 155)
+main_1.Parent=container_1
+main_1.AnchorPoint=Vector2.new(0.5, 0.5)
+main_1.AutomaticSize=Enum.AutomaticSize.XY
+main_1.BackgroundColor3=Color3.fromRGB(255,255,255)
 
-local UIListLayout_1 = Instance.new("UIListLayout")
-local container_1 = Instance.new("Frame")
-local main_1 = Instance.new("Frame")
-local Top_1 = Instance.new("TextLabel")
-local UICorner_1 = Instance.new("UICorner")
-local CortexionIcon_1 = Instance.new("ImageLabel")
-local UIPadding_1 = Instance.new("UIPadding")
-local UICorner_2 = Instance.new("UICorner")
-local UIGradient_1 = Instance.new("UIGradient")
-local UIStroke_1 = Instance.new("UIStroke")
-local UIGradient_2 = Instance.new("UIGradient")
-local information_1 = Instance.new("TextLabel")
-local UIPadding_2 = Instance.new("UIPadding")
-local UIPadding_3 = Instance.new("UIPadding")
-CortexionNotification.Name = c.generatebytes()
-CortexionNotification.Parent = game.CoreGui
-CortexionNotification.DisplayOrder = 2147483647
-holder_1.Parent = CortexionNotification
-holder_1.AnchorPoint = Vector2.new(0.5, 0.5)
-holder_1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-holder_1.BackgroundTransparency = 1
-holder_1.BorderColor3 = Color3.fromRGB(0, 0, 0)
-holder_1.BorderSizePixel = 0
-holder_1.Position = UDim2.new(0.5, 0, 0.5, 0)
-holder_1.Size = UDim2.new(1, 0, 1, 0)
-UIListLayout_1.Parent = holder_1
-UIListLayout_1.HorizontalAlignment = Enum.HorizontalAlignment.Right
-UIListLayout_1.SortOrder = Enum.SortOrder.LayoutOrder
-UIListLayout_1.VerticalAlignment = Enum.VerticalAlignment.Bottom
-container_1.Parent = holder_1
-container_1.AnchorPoint = Vector2.new(0.5, 0.5)
-container_1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-container_1.BackgroundTransparency = 1
-container_1.BorderColor3 = Color3.fromRGB(0, 0, 0)
+main_1.BorderColor3=Color3.fromRGB(0,0,0)
+main_1.BorderSizePixel=0
+main_1.Position=UDim2.new(2, -100,1, -70)
+main_1.Size=UDim2.new(0, 215,0, 100)
+Top_1.Parent=main_1
+Top_1.AnchorPoint=Vector2.new(0.5, 0.5)
+Top_1.BackgroundColor3=Color3.fromRGB(43, 43, 43)
+Top_1.BorderColor3=Color3.fromRGB(27,42,53)
+Top_1.Position=UDim2.new(0.5, 0,0.119999997, 0)
+Top_1.Size=UDim2.new(0, 215,0, 25)
+Top_1.Font=Enum.Font.Gotham
+Top_1.Text="Cortexion"
+Top_1.TextColor3=Color3.fromRGB(255,255,255)
+Top_1.TextSize=14
+Top_1.TextXAlignment=Enum.TextXAlignment.Left
+UICorner_1.Parent=Top_1
+UICorner_1.CornerRadius=UDim.new(0,4)
+CortexionIcon_1.Parent=Top_1
+CortexionIcon_1.AnchorPoint=Vector2.new(0.5, 0.5)
+CortexionIcon_1.BackgroundColor3=Color3.fromRGB(255,255,255)
+CortexionIcon_1.BackgroundTransparency=1
+CortexionIcon_1.BorderColor3=Color3.fromRGB(27,42,53)
+CortexionIcon_1.Position=UDim2.new(-0.12110053, 0,0.5, 0)
+CortexionIcon_1.Size=UDim2.new(0, 21,0, 21)
+CortexionIcon_1.Image="rbxassetid://14838778668"
+UIPadding_1.Parent=Top_1
+UIPadding_1.PaddingLeft=UDim.new(0,40)
+UICorner_2.Parent=main_1
+UICorner_2.CornerRadius=UDim.new(0,4)
+UIGradient_1.Parent=main_1
+UIGradient_1.Color=ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(43, 43, 43)), ColorSequenceKeypoint.new(1, Color3.fromRGB(9, 216, 244))}
+UIGradient_1.Rotation=90
+UIStroke_1.Parent=main_1
+UIStroke_1.ApplyStrokeMode=Enum.ApplyStrokeMode.Border
+UIStroke_1.Color=Color3.fromRGB(255,255,255)
+UIStroke_1.Thickness=2
+UIGradient_2.Parent=UIStroke_1
+UIGradient_2.Color=ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(107, 39, 122)), ColorSequenceKeypoint.new(1, Color3.fromRGB(84, 144, 213))}
+information_1.Parent=main_1
+information_1.AnchorPoint=Vector2.new(0.5, 0.5)
+information_1.BackgroundColor3=Color3.fromRGB(255,255,255)
+information_1.BackgroundTransparency=1
+information_1.BorderColor3=Color3.fromRGB(0,0,0)
+information_1.BorderSizePixel=0
+information_1.Position=UDim2.new(0.49999997, 0,0.610000014, 0)
+information_1.Size=UDim2.new(0, 214,0, 78)
+information_1.Text=""
+information_1.Font=Enum.Font.Montserrat
 
-container_1.BorderSizePixel = 0
-container_1.Position = UDim2.new(0.907002985, 0, 0.891910732, 0)
-container_1.Size = UDim2.new(0, 250, 0, 155)
-main_1.Parent = container_1
-main_1.AnchorPoint = Vector2.new(0.5, 0.5)
-main_1.AutomaticSize = Enum.AutomaticSize.XY
-main_1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-main_1.BorderColor3 = Color3.fromRGB(0, 0, 0)
-main_1.BorderSizePixel = 0
-main_1.Position = UDim2.new(2, -100, 1, -70)
-main_1.Size = UDim2.new(0, 215, 0, 100)
-Top_1.Parent = main_1
-Top_1.AnchorPoint = Vector2.new(0.5, 0.5)
-
-Top_1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-
-Top_1.BorderColor3 = Color3.fromRGB(27, 42, 53)
-Top_1.Position = UDim2.new(0.5, 0, 0.119999997, 0)
-Top_1.Size = UDim2.new(0, 215, 0, 25)
-Top_1.Font = Enum.Font.Gotham
-Top_1.Text = "Cortexion"
-Top_1.TextColor3 = Color3.fromRGB(255, 255, 255)
-Top_1.TextSize = 14
-Top_1.TextXAlignment = Enum.TextXAlignment.Left
-UICorner_1.Parent = Top_1
-UICorner_1.CornerRadius = UDim.new(0, 4)
-CortexionIcon_1.Parent = Top_1
-
-CortexionIcon_1.AnchorPoint = Vector2.new(0.5, 0.5)
-CortexionIcon_1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-CortexionIcon_1.BackgroundTransparency = 1
-CortexionIcon_1.BorderColor3 = Color3.fromRGB(27, 42, 53)
-CortexionIcon_1.Position = UDim2.new(-0.12110053, 0, 0.5, 0)
-CortexionIcon_1.Size = UDim2.new(0, 21, 0, 21)
-CortexionIcon_1.Image = "rbxassetid://14838778668"
-UIPadding_1.Parent = Top_1
-UIPadding_1.PaddingLeft = UDim.new(0, 40)
-UICorner_2.Parent = main_1
-UICorner_2.CornerRadius = UDim.new(0, 4)
-
-UIGradient_1.Parent = main_1
-UIGradient_1.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(31, 31, 31)), ColorSequenceKeypoint.new(1, Color3.fromRGB(63, 160, 239))}
-UIGradient_1.Rotation = 90
-UIStroke_1.Parent = main_1
-UIStroke_1.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-UIStroke_1.Color = Color3.fromRGB(255, 255, 255)
-UIStroke_1.Thickness = 2
-UIGradient_2.Parent = UIStroke_1
-UIGradient_2.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(107, 39, 122)), ColorSequenceKeypoint.new(1, Color3.fromRGB(84, 144, 213))}
-information_1.Parent = main_1
-information_1.AnchorPoint = Vector2.new(0.5, 0.5)
-information_1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-information_1.BackgroundTransparency = 1
-
-information_1.BorderColor3 = Color3.fromRGB(0, 0, 0)
-information_1.BorderSizePixel = 0
-information_1.Position = UDim2.new(0.49999997, 0, 0.610000014, 0)
-information_1.Size = UDim2.new(0, 214, 0, 78)
-information_1.Text = ""
-information_1.Font = Enum.Font.Montserrat
-information_1.TextColor3 = Color3.fromRGB(255, 255, 255)
-information_1.TextSize = 12
-
-information_1.TextWrapped = true
-information_1.TextXAlignment = Enum.TextXAlignment.Left
-information_1.TextYAlignment = Enum.TextYAlignment.Top
-UIPadding_2.Parent = information_1
-UIPadding_2.PaddingLeft = UDim.new(0, 10)
-UIPadding_2.PaddingRight = UDim.new(0, 2)
-UIPadding_2.PaddingTop = UDim.new(0, 10)
-UIPadding_3.Parent = container_1
-UIPadding_3.PaddingRight = UDim.new(0, 20)
+information_1.TextColor3=Color3.fromRGB(255,255,255)
+information_1.TextSize=12
+information_1.TextWrapped=true
+information_1.TextXAlignment=Enum.TextXAlignment.Left
+information_1.TextYAlignment=Enum.TextYAlignment.Top
+UIPadding_2.Parent=information_1
+UIPadding_2.PaddingLeft=UDim.new(0,10)
+UIPadding_2.PaddingRight=UDim.new(0,2)
+UIPadding_2.PaddingTop=UDim.new(0,10)
+UIPadding_3.Parent=container_1
+UIPadding_3.PaddingRight=UDim.new(0,20)
 
 local function SAOKCV_fake_script()
 	local scriptz = Instance.new('LocalScript', CortexionNotification)
@@ -447,12 +441,12 @@ local function SAOKCV_fake_script()
 	local function TypeWrite(Obj, Text)
 		for I = 1, #Text, 1 do
 			Obj.Text = string.sub(Text, 1, I)
-			wait() 
+			wait()
 		end
 	end
 	
 	local Frame = main_1
-	local BorderGradient = UIGradient_2
+	local BorderGradient = UIGradient_2  
 	local InformationBox = information_1
 	
 	local TWEEN_LENGTH = 0.5
@@ -473,7 +467,7 @@ local function SAOKCV_fake_script()
 	local TweenInf = TweenInfo.new(2.5, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, -1, true, 0)
 	local TweenRt = TweenService:Create(BorderGradient, TweenInf, {Rotation = 360})
 	
-	local TweenSwitchFrame = TweenInfo.new(0.7, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)
+	local TweenSwitchFrame = TweenInfo.new(0.7, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)  
 	local ShowFrame = TweenService:Create(Frame, TweenSwitchFrame, {Position = UDim2.new(1, -100, 1, -70)})
 	local HideFrame = TweenService:Create(Frame, TweenSwitchFrame, {Position = UDim2.new(2, -100, 1, -70)})
 	
@@ -485,8 +479,8 @@ local function SAOKCV_fake_script()
 	
 	wait(3)
 	
-	HideFrame:Play() 
-	HideFrame.Completed:Wait()
+	HideFrame:Play()
+	HideFrame.Completed:Wait()  
 	CortexionNotification:Remove()
 end
 coroutine.wrap(SAOKCV_fake_script)()
